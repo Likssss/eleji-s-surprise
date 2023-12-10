@@ -2,12 +2,24 @@ var title = document.getElementById('title');
 title.innerHTML = "December 2023";
 
 var date = new Date();
-var month = date.getMonth() + 1;
-var year = date.getFullYear();
+var month = 12;
+var year = 2023;
 var christmasDay = 25;
 var today = date.getDate();
 
 var calendar = document.getElementById('calendar');
+
+
+// Find out which day of the week December 1st, 2023 falls on
+var firstDay = new Date(year, month - 1, 1).getDay();
+
+// Create empty divs for the days before December 1st
+for (var i = 0; i < firstDay; i++) {
+    var emptyDay = document.createElement('div');
+    emptyDay.classList.add('day');
+    calendar.appendChild(emptyDay);
+}
+
 
 // Pre-defined notes for each day
 var notes = {
@@ -76,12 +88,11 @@ for (var i = 1; i <= 31; i++) {
 
     // Add color to Sundays and Saturdays
     var weekday = new Date(year, month - 1, i).getDay();
-    if (weekday === 4) { // Sunday
+    if (weekday === 0) { // Sunday
         day.style.color = "red";
-    } else if (weekday === 3) { // Saturday
+    } else if (weekday === 6) { // Saturday
         day.style.color = "grey";
     }
 
     calendar.appendChild(day);
 }
-
